@@ -6,22 +6,26 @@ import {
 import { UsersService } from './users.service';
 import { randomBytes, scrypt as _scrypt } from 'crypto';
 import { promisify } from 'util';
-
+import cookieSession from 'cookie-session';
 const scrypt = promisify(_scrypt);
-@Injectable() 
+
+@Injectable()
 export class AuthService {
   constructor(private usersService: UsersService) {}
 
   async signup(email: string, password: string) {
-    const users = await this.usersService.find(email);
-    if (users.length) {
+    const user = await this.usersService.find(email);
+
+    if (user) {
       throw new BadRequestException('email in use');
     }
+
     const salt = randomBytes(8).toString('hex');
     const hash = (await scrypt(password, salt, 32)) as Buffer;
+
     const result = salt + '.' + hash.toString('hex');
-    const user = await this.usersService.create(email, result);
-    return user;
+
+    return this.usersService.create(email, result);
   }
 
   async signin(email: string, password: string) {
@@ -30,16 +34,16 @@ export class AuthService {
       throw new NotFoundException('user not found');
     }
 
-    const [salt, hashedStored]= user.password.split('.');
+    const [salt, hashedPassword]=user.password.split('.');
 
-    const hash= (await scrypt(password, salt, 32)) as Buffer;
 
-    if(hashedStored!==hash.toString('hex')){
-        throw new NotFoundException('bad password');
+
+    const hash = (await scrypt(password, salt, 32)) as Buffer;
+
+    if (hashedPassword !== hash.toString('hex')) {
+      throw new BadRequestException('bad password');
     }
 
     return user;
-
-
   }
 }
