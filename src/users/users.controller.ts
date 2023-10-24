@@ -24,6 +24,12 @@ export class UsersController {
     private authService: AuthService,
   ) {}
 
+
+  @Get()
+  whoAmI(@Session() session){
+    return this.usersService.findOne(session.userId);
+  }
+
   @Post('signout')
   signout(@Session() session) {
     session.userId = null;
