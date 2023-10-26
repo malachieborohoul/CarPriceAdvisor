@@ -26,7 +26,7 @@ export class UsersController {
   ) {}
 
 
-  // @Get('/whoami)
+  // @Get('/whoami')
   // whoAmI(@Session() session){
   //   return this.usersService.findOne(session.userId);
   // }
