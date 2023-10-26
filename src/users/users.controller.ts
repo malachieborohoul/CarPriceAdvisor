@@ -10,11 +10,11 @@ import {
   Session,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
-import { UpdateUserDto } from 'src/dtos/update-user.dto';
-import { CreateUserDto } from 'src/dtos/create-user.dto';
+import { UpdateUserDto } from 'src/users/dtos/update-user.dto';
+import { CreateUserDto } from 'src/users/dtos/create-user.dto';
 import { AuthService } from './auth.service';
 import { Serialize } from 'src/interceptors/serialize.interceptor';
-import { UserDto } from 'src/dtos/user-dto';
+import { UserDto } from 'src/users/dtos/user-dto';
 
 @Controller('auth')
 @Serialize(UserDto)
