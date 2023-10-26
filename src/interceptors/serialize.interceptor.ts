@@ -4,7 +4,7 @@ import { Observable, map } from 'rxjs';
 import { UserDto } from 'src/dtos/user-dto';
 
 interface ClassContructor{
-    new (...arg: any[]):{}
+    new (...args: any[]):{}
 }
 
 export function Serialize(dto:ClassContructor){
@@ -18,7 +18,7 @@ export class SerializeInterceptor implements NestInterceptor {
     next: CallHandler<any>,
   ): Observable<any> | Promise<Observable<any>> {
     return next.handle().pipe(
-      map((data: UserDto) => {
+      map((data: any) => {
         return plainToInstance(this.dto, data, {
           excludeExtraneousValues: true,
         });
