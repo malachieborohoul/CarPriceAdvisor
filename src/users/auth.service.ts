@@ -20,13 +20,12 @@ export class AuthService {
       throw new BadRequestException('email in use');
     }
 
-    const salt = randomBytes(32);
+    const salt = randomBytes(8).toString('hex');
 
-    const pass = user.password + '.' + salt;
+    const hash = (await scrypt(password, salt, 32)) as Buffer;
+    const result = salt + '.' + hash.toString('hex');
 
-    const hash = (await scrypt(pass, salt, 32)) as Buffer;
-
-    return this.usersService.create(email, hash.toString('hex'));
+    return this.usersService.create(email, result);
   }
 
   @Post('/signin')
@@ -37,12 +36,12 @@ export class AuthService {
       throw new NotFoundException('user not found');
     }
 
-    const [hashedPassword, salt] = user.password.split('.');
+    const [salt, hashedPassword] = user.password.split('.');
 
     const hash = (await scrypt(password, salt, 32)) as Buffer;
 
     if (hashedPassword !== hash.toString('hex')) {
-      throw new BadRequestException('password not found');
+      throw new BadRequestException('password incorrect');
     }
 
     return user;

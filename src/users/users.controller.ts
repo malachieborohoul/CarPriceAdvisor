@@ -26,7 +26,7 @@ export class UsersController {
   async signup(@Body() body: CreateUserDto) {
     const user = await this.usersService.find(body.email);
 
-    if (user) {
+    if (user.length) {
       throw new BadRequestException('email in use');
     }
 
