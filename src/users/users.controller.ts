@@ -9,6 +9,7 @@ import {
   Patch,
   Post,
   Query,
+  Session,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { UpdateUserDto } from './dtos/update-user.dto';
@@ -25,14 +26,17 @@ export class UsersController {
   ) {}
 
   @Post('/signup')
-  async signup(@Body() body: CreateUserDto) {
+  async signup(@Body() body: CreateUserDto, @Session() session: any) {
     const user = await this.usersService.find(body.email);
 
     if (user.length) {
       throw new BadRequestException('email in use');
     }
 
-    return this.authService.signup(body.email, body.password);
+    const result=  this.authService.signup(body.email, body.password);
+    session.userId=(await result).id;
+    return result;
+
   }
 
   @Post('/signin')
