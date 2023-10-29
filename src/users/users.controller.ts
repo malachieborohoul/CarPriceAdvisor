@@ -14,7 +14,9 @@ import { UsersService } from './users.service';
 import { UpdateUserDto } from './dtos/update-user.dto';
 import { CreateUserDto } from './dtos/create-user.dto';
 import { AuthService } from './auth.service';
-
+import { Serialize } from './interceptors/serialize.interceptor';
+import { UserDto } from './dtos/user.dto';
+@Serialize(UserDto)
 @Controller('auth')
 export class UsersController {
   constructor(
