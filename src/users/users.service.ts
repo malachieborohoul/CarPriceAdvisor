@@ -7,6 +7,10 @@ import { InjectRepository } from '@nestjs/typeorm';
 export class UsersService {
   constructor(@InjectRepository(User) private repo: Repository<User>) {}
 
+  create(email: string, password: string) {
+    const user = {email, password};
+    return this.repo.save(user);
+  }
   async findOne(id: number) {
     const user = await this.repo.findOneBy({ id });
 
@@ -43,7 +47,6 @@ export class UsersService {
       throw new NotFoundException('user not found');
     }
 
-   return this.repo.remove(user);
-
+    return this.repo.remove(user);
   }
 }
