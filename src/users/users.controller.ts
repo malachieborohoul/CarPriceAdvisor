@@ -17,6 +17,8 @@ import { CreateUserDto } from './dtos/create-user.dto';
 import { AuthService } from './auth.service';
 import { Serialize } from './interceptors/serialize.interceptor';
 import { UserDto } from './dtos/user.dto';
+import { User } from './user.entity';
+import { CurrentUser } from './decorators/current-user.decorator';
 @Serialize(UserDto)
 @Controller('auth')
 export class UsersController {
@@ -25,13 +27,17 @@ export class UsersController {
     private authService: AuthService,
   ) {}
 
-  @Get('/whoami')
-  whoami(@Session() session:any){
-    console.log(session.userId);
-  }
+  //   @Get('/whoami')
+  //   whoami(@Session() session:any){
+  //     console.log(session.userId);
+  //   }
 
+  @Get('/whoami')
+  whoAmi(@CurrentUser() user: User) {
+    return user;
+  }
   @Post('/signout')
-  signOut(@Session() session:any){
+  signOut(@Session() session: any) {
     session.userId = null;
   }
 
@@ -43,10 +49,9 @@ export class UsersController {
       throw new BadRequestException('email in use');
     }
 
-    const result=  this.authService.signup(body.email, body.password);
-    session.userId=(await result).id;
+    const result = this.authService.signup(body.email, body.password);
+    session.userId = (await result).id;
     return result;
-
   }
 
   @Post('/signin')
