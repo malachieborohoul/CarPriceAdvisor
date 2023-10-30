@@ -26,8 +26,13 @@ export class UsersController {
   ) {}
 
   @Get('/whoami')
-  whoami(@Session() session){
+  whoami(@Session() session:any){
     console.log(session.userId);
+  }
+
+  @Post('/signout')
+  signOut(@Session() session:any){
+    session.userId = null;
   }
 
   @Post('/signup')
