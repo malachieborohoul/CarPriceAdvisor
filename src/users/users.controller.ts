@@ -52,19 +52,21 @@ export class UsersController {
       throw new BadRequestException('email in use');
     }
 
-    const result = this.authService.signup(body.email, body.password);
-    session.userId = (await result).id;
+    const result = await this.authService.signup(body.email, body.password);
+    session.userId =  result.id;
     return result;
   }
 
   @Post('/signin')
-  async signin(@Body() body: CreateUserDto) {
+  async signin(@Body() body: CreateUserDto, @Session() session:any) {
     const user = await this.usersService.find(body.email);
     if (!user) {
       throw new NotFoundException('email not found');
     }
 
-    return this.authService.signin(body.email, body.password);
+    const result=await this.authService.signin(body.email, body.password);
+    session.userId =  result.id;
+    return result;
   }
 
   @Get('/:id')
