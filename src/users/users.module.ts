@@ -11,7 +11,6 @@ import { CurrentUserInterceptor } from './interceptors/current-user.interceptor'
   providers: [
     UsersService,
     AuthService,
-    ,
   ],
   imports: [TypeOrmModule.forFeature([User])],
 })
