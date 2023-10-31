@@ -8,7 +8,11 @@ import { CurrentUserInterceptor } from './interceptors/current-user.interceptor'
 
 @Module({
   controllers: [UsersController],
-  providers: [UsersService, AuthService, CurrentUserInterceptor],
+  providers: [
+    UsersService,
+    AuthService,
+    ,
+  ],
   imports: [TypeOrmModule.forFeature([User])],
 })
 export class UsersModule {}
