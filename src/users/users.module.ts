@@ -4,7 +4,7 @@ import { UsersService } from './users.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './user.entity';
 import { AuthService } from './auth.service';
-import { CreateUserInterceptor } from './interceptors/current-user.interceptor';
+import { CreateUserInterceptor } from '../interceptors/current-user.interceptor';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 
 @Module({
