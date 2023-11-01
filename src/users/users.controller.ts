@@ -30,7 +30,10 @@ export class UsersController {
     private authService: AuthService,
   ) {}
 
-
+  //   @Get('/whoami')
+  //   whoami(@Session() session:any){
+  //     console.log(session.userId);
+  //   }
 
   @Get('/whoami')
   @UseGuards(AuthGuard)
