@@ -2,24 +2,22 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { AuthService } from './auth.service';
 import { UsersService } from './users.service';
 
-it('can create an instance of auth service', async() => {
+it('create an instance of Auth Service', async()=>{
   const fakeUsersService = {
-    find: () => Promise.resolve([]),
-
-    create: (email: string, password: string) => ({ id: 1, email, password }),
-  };
+    create : (email:string, password: string)=>Promise.resolve({id:1, email, password}),
+    find: (email:string)=>Promise.resolve([])
+  }
 
   const module = await Test.createTestingModule({
-    providers: [
-      AuthService,
-      {
+    providers:[
+      AuthService,{
         provide: UsersService,
-        useValue: fakeUsersService,
-      },
-    ],
+        useValue: fakeUsersService
+      }
+    ]
   }).compile();
 
   const service = module.get(AuthService);
 
   expect(service).toBeDefined()
-});
+})
