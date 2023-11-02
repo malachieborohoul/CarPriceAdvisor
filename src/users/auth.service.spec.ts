@@ -6,7 +6,18 @@ it('can create an instance of auth service', async () => {
   const fakeUsersService = {
     create: (email: string, password: string) =>
       Promise.resolve({ id: 1, email, password }),
-
-    find: ()=>Promise.resolve()
+    find: () => Promise.resolve(),
   };
+
+  const module= await Test.createTestingModule({
+    providers:[
+      AuthService,{
+        provide: UsersService,
+        useValue: fakeUsersService
+      }
+    ]
+  }).compile();
+
+  const service = module.get(AuthService);
+  expect(service).toBeDefined()
 });
