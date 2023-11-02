@@ -7,6 +7,6 @@ it('can create an instance of auth service', async () => {
     create: (email: string, password: string) =>
       Promise.resolve({ id: 1, email, password }),
 
-    find: ()=>Promise.resolve()
+    find: ()=>Promise.resolve
   };
 });
