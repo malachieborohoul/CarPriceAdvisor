@@ -26,6 +26,12 @@ export class UsersController {
   ) {}
 
 
+  @Get('/whoami')
+  whoami(){
+
+  }
+
+
   @Post('/signup')
   async signup(@Body() body: CreateUserDto, @Session() session) {
     
