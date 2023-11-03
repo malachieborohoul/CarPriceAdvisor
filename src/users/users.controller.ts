@@ -14,14 +14,17 @@ import {
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dtos/create-user.dto';
 import { AuthService } from './auth.service';
-import { NotFoundError } from 'rxjs';
+import { Serialize } from 'src/interceptors/serialize.interceptor';
+import { UserDto } from './dtos/user.dto';
 
+@Serialize(UserDto)
 @Controller('auth')
 export class UsersController {
   constructor(
     private usersService: UsersService,
     private authService: AuthService,
   ) {}
+
 
   @Post('/signup')
   async signup(@Body() body: CreateUserDto, @Session() session) {
