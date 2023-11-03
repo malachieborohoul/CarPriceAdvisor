@@ -1,16 +1,20 @@
 import {
+  BadRequestException,
   Body,
   Controller,
   Delete,
   Get,
+  NotFoundException,
   Param,
   Patch,
   Post,
   Query,
+  Session,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dtos/create-user.dto';
 import { AuthService } from './auth.service';
+import { NotFoundError } from 'rxjs';
 
 @Controller('auth')
 export class UsersController {
@@ -20,13 +24,24 @@ export class UsersController {
   ) {}
 
   @Post('/signup')
-  signup(@Body() body: CreateUserDto) {
-    return this.authService.signup(body.email, body.password);
+  async signup(@Body() body: CreateUserDto, @Session() session) {
+    
+    const user= await this.authService.signup(body.email, body.password);
+    if(!user){
+      throw new BadRequestException("users bad request")
+    }
+    session.userId=user.id;
   }
 
   @Post('/signin')
-  signin(@Body() body: CreateUserDto) {
-    return this.authService.signin(body.email, body.password);
+  async signin(@Body() body: CreateUserDto, @Session() session) {
+    const user=await this.authService.signin(body.email, body.password);
+
+    if(!user){
+      throw new NotFoundException('')
+    }
+
+    session.userId=user.id;
   }
 
   @Get()
