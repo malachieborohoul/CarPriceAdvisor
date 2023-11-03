@@ -5,23 +5,34 @@ import { NotFoundError } from 'rxjs';
 
 @Injectable()
 export class UsersService {
-    constructor(private repo: Repository<User>){}
+  constructor(private repo: Repository<User>) {}
 
-    async find(email: string){
-      const user= await this.repo.findBy({email});
-      if(!user){
-        throw new NotFoundException("user not found");
-      }
-      return user;
+  async find(email: string) {
+    const user = await this.repo.findBy({ email });
+    if (!user) {
+      throw new NotFoundException('user not found');
+    }
+    return user;
+  }
+
+  async findOne(id: number) {
+    const user = await this.repo.findOneBy({ id });
+
+    if (!user) {
+      throw new NotFoundException('user not found');
     }
 
-    async findOne(id:number){
-        const user=await this.repo.findOneBy({id});
+    return user;
+  }
 
-        if(!user){
-            throw new NotFoundException('user not found');
-        }
+  async update(id: number, attrs: Partial<User>) {
+    const user = await this.findOne(id);
 
-        return user;
+    if (!user) {
+      throw new NotFoundException('user not found');
     }
+    Object.assign(user, attrs);
+
+    return this.repo.save(user);
+  }
 }
