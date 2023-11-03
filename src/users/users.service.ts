@@ -7,6 +7,11 @@ import { NotFoundError } from 'rxjs';
 export class UsersService {
   constructor(private repo: Repository<User>) {}
 
+  create(email: string, password: string) {
+    const user = { email, password };
+    return this.repo.save(user);
+  }
+
   async find(email: string) {
     const user = await this.repo.findBy({ email });
     if (!user) {
