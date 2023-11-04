@@ -15,7 +15,7 @@ async function bootstrap() {
 
    app.use(cookieSession({
   keys:['dkkdkddk']
-  // }))
+  / }))
 
   await app.listen(3000);
 }
