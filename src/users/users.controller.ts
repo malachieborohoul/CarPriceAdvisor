@@ -17,7 +17,7 @@ import { AuthService } from './auth.service';
 import { Serialize } from 'src/interceptors/serialize.interceptor';
 import { UserDto } from './dtos/user.dto';
 import { CurrentUser } from 'src/decorators/current-user.decorator';
-// currentUse
+// currentUs
 @Serialize(UserDto)
 @Controller('auth')
 export class UsersController {
