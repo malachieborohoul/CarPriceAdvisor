@@ -9,7 +9,7 @@ export class CurrentUserInterceptor implements NestInterceptor{
         const userId = request.session.userId;
         const user = await this.usersService.findOne(userId);
         if(!user){
-            throw new NotFoundException("user not found")
+            throw new NotFoundException("user not connected")
         }
         return next.handle();
     }
