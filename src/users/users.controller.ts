@@ -26,7 +26,7 @@ export class UsersController {
     private authService: AuthService,
   ) {}
 
-// Whoa
+// Who
   @Get('/whoami')
   whoami(){
 
