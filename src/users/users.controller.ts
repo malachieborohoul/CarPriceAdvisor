@@ -61,6 +61,7 @@ export class UsersController {
     return this.usersService.findOne(parseInt(id));
   }
 
+  // update
   @Patch()
   update(@Param('id') id: string, @Body() body: CreateUserDto) {
     return this.usersService.update(parseInt(id), body);
