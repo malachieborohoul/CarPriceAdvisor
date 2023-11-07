@@ -26,33 +26,29 @@ export class UsersController {
     private authService: AuthService,
   ) {}
 
-
+  // Whoami
   @Get('/whoami')
-  whoami(){
-
-  }
-
+  whoami() {}
 
   @Post('/signup')
   async signup(@Body() body: CreateUserDto, @Session() session) {
-    
-    const user= await this.authService.signup(body.email, body.password);
-    if(!user){
-      throw new BadRequestException("users bad request")
+    const user = await this.authService.signup(body.email, body.password);
+    if (!user) {
+      throw new BadRequestException('users bad request');
     }
-    session.userId=user.id;
+    session.userId = user.id;
   }
-// Signup
+  // Signup
 
   @Post('/signin')
   async signin(@Body() body: CreateUserDto, @Session() session) {
-    const user=await this.authService.signin(body.email, body.password);
+    const user = await this.authService.signin(body.email, body.password);
 
-    if(!user){
-      throw new NotFoundException('')
+    if (!user) {
+      throw new NotFoundException('');
     }
 
-    session.userId=user.id;
+    session.userId = user.id;
   }
 
   @Get()
