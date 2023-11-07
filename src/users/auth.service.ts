@@ -28,7 +28,7 @@ export class AuthService {
     return this.usersService.create(email, result);
   }
 
-  // Sign
+  // Sig
 
   async signin(email: string, password: string) {
     const [user] = await this.usersService.find(email);
