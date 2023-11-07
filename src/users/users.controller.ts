@@ -50,12 +50,12 @@ export class UsersController {
 
     session.userId = user.id;
   }
-// findAllUsers
+  // findAllUsers
   @Get()
   findAllUsers(@Query('email') email: string) {
     return this.usersService.find(email);
   }
-// findUser
+  // findUser
   @Get('/:id')
   findUser(@Param('id') id: string) {
     return this.usersService.findOne(parseInt(id));
@@ -66,7 +66,7 @@ export class UsersController {
   update(@Param('id') id: string, @Body() body: CreateUserDto) {
     return this.usersService.update(parseInt(id), body);
   }
-
+// delete
   @Delete('/:id')
   remove(@Param('id') id: string) {
     return this.usersService.remove(parseInt(id));
