@@ -1,5 +1,6 @@
 import { Body, Controller, Get, Param, Patch, Query } from '@nestjs/common';
 import { UsersService } from './users.service';
+import { CreateUserDto } from './dtos/create-user.dto';
 
 @Controller('users')
 export class UsersController {
@@ -16,5 +17,7 @@ export class UsersController {
   }
 
   @Patch('/:id')
-  update(@Param('id') id:string, ){}
+  update(@Param('id') id:string, @Body() body: CreateUserDto ){
+    return this.usersService.update(parseInt(id), body);
+  }
 }
