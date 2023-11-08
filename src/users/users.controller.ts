@@ -25,13 +25,26 @@ export class UsersController {
   ) {}
 
   @Post()
-  async signin(@Body() body: CreateUserDto, @Session() session) {
+  async signup(@Body() body: CreateUserDto, @Session() session) {
     const user = await this.usersService.find(body.email);
-    if (!user) {
-      throw new NotFoundException('user not found');
+    if (user) {
+      throw new NotFoundException('email in use');
     }
     const result = await this.authService.signup(body.email, body.password);
     session.userId = result.id;
+
+    return result;
+  }
+
+  async signin(@Body() body: CreateUserDto, @Session() session) {
+    const user = await this.usersService.find(body.email);
+
+    if (!user) {
+      throw new NotFoundException('user not found');
+    }
+    const result = await this.authService.signin(body.email, body.password);
+    session.userId = result.id;
+    return result;
   }
 
   @Get('/:id')
