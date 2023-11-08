@@ -3,19 +3,36 @@ import {
   Controller,
   Delete,
   Get,
+  NotFoundException,
   Param,
   Patch,
+  Post,
   Query,
+  Session,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dtos/create-user.dto';
 import { Serialize } from './interceptors/serialize.interceptor';
 import { UserDto } from './dtos/user.dto';
+import { AuthService } from './auth.service';
 
 @Serialize(UserDto)
 @Controller('auth')
 export class UsersController {
-  constructor(private usersService: UsersService) {}
+  constructor(
+    private usersService: UsersService,
+    private authService: AuthService,
+  ) {}
+
+  @Post()
+  async signin(@Body() body: CreateUserDto, @Session() session) {
+    const user = await this.usersService.find(body.email);
+    if (!user) {
+      throw new NotFoundException('user not found');
+    }
+    const result = await this.authService.signup(body.email, body.password);
+    session.userId = result.id;
+  }
 
   @Get('/:id')
   findUser(@Param('id') id: string) {
