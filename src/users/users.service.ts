@@ -26,7 +26,15 @@ export class UsersService {
     }
 
     async create(email: string, password: string){
-        
+        const user = await this.find(email);
+
+        if(!user){
+            throw new NotFoundException("user not found");
+        }
+
+        const result = {email, password};
+
+        return this.repo.save(result);
     }
 
    
