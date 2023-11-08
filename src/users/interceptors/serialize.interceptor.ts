@@ -6,12 +6,11 @@ import {
 } from '@nestjs/common';
 import { plainToInstance } from 'class-transformer';
 import { Observable, map } from 'rxjs';
-import { UserDto } from '../dtos/user.dto';
 
 export const Serialize = (dto: any) => {
   return UseInterceptors(new SerializeInterceptor(dto));
 };
-
+// 
 export class SerializeInterceptor implements NestInterceptor {
   constructor(private dto: any) {}
   intercept(
