@@ -10,7 +10,7 @@ import { Observable, map } from 'rxjs';
 export const Serialize = (dto: any) => {
   return UseInterceptors(new SerializeInterceptor(dto));
 };
-// SerializeIntercep
+// SerializeInterce
 export class SerializeInterceptor implements NestInterceptor {
   constructor(private dto: any) {}
   intercept(
