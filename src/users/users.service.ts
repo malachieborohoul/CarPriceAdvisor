@@ -37,5 +37,16 @@ export class UsersService {
         return this.repo.save(result);
     }
 
+    async update (id: number, attrs: Partial<User>){
+        const user = await this.findOne(id);
+
+        if(!user){
+            throw new NotFoundException("user not found");
+        }
+        Object.assign(user, attrs);
+
+        this.repo.save(user);
+    }
+
    
 }
