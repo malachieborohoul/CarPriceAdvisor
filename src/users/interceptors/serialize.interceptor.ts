@@ -7,7 +7,11 @@ import {
 import { plainToInstance } from 'class-transformer';
 import { Observable, map } from 'rxjs';
 
-export const Serialize = (dto: any) => {
+interface ClassContainer {
+  new (...args: any[]): {};
+}
+
+export const Serialize = (dto: ClassContainer) => {
   return UseInterceptors(new SerializeInterceptor(dto));
 };
 
@@ -19,7 +23,7 @@ export class SerializeInterceptor implements NestInterceptor {
   ): Observable<any> | Promise<Observable<any>> {
     return next.handle().pipe(
       map((data) => {
-         return plainToInstance(this.dto,data, {
+        return plainToInstance(this.dto, data, {
           excludeExtraneousValues: true,
         });
       }),
