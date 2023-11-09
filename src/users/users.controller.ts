@@ -32,7 +32,7 @@ export class UsersController {
   whoami(@CurrentUser() user: User) {
     return user;
   }
-
+// SIGNUP
   @Post('/signup')
   async signup(@Body() body: CreateUserDto, @Session() session:any) {
     const user = await this.usersService.find(body.email);
