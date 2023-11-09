@@ -24,7 +24,10 @@ export class UsersController {
     private authService: AuthService,
   ) {}
 
-  @Post()
+  @Get('/whoami')
+  whoami(){}  
+
+  @Post('/signup')
   async signup(@Body() body: CreateUserDto, @Session() session) {
     const user = await this.usersService.find(body.email);
     if (user) {
@@ -35,7 +38,7 @@ export class UsersController {
 
     return result;
   }
-
+@Post('/signin')
   async signin(@Body() body: CreateUserDto, @Session() session) {
     const user = await this.usersService.find(body.email);
 

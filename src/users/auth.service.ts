@@ -9,7 +9,7 @@ export class AuthService {
   constructor(private usersService: UsersService) {}
 
   async signup(email: string, password: string) {
-    const user = await this.usersService.find(email);
+    const [user] = await this.usersService.find(email);
 
     if (user) {
       throw new BadRequestException('email in use');
@@ -35,7 +35,7 @@ export class AuthService {
 
     const pass = (await scrypt(password, salt,32)) as Buffer;
 
-    if(user.password !== pass.toString('hex')){
+    if(hashedPassword !== pass.toString('hex')){
         throw new BadRequestException("bad password");
     }
 
