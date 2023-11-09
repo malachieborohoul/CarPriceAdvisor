@@ -9,12 +9,16 @@ import {
   Post,
   Query,
   Session,
+  UseInterceptors,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dtos/create-user.dto';
 import { Serialize } from './interceptors/serialize.interceptor';
 import { UserDto } from './dtos/user.dto';
 import { AuthService } from './auth.service';
+import { CurrentUser } from './decorators/current-user.decorator';
+import { CurrentUserInterceptor } from './interceptors/current-user.interceptor';
+import { User } from './user.entity';
 
 @Serialize(UserDto)
 @Controller('auth')
@@ -22,15 +26,15 @@ export class UsersController {
   constructor(
     private usersService: UsersService,
     private authService: AuthService,
-  ) {}
-
+  ) {} 
+  @UseInterceptors(CurrentUserInterceptor)
   @Get('/whoami')
-  whoami(@Session() session){
-    return session.userId;
-  }  
+  whoami(@CurrentUser() user: User) {
+    return user;
+  }
 
   @Post('/signup')
-  async signup(@Body() body: CreateUserDto, @Session() session) {
+  async signup(@Body() body: CreateUserDto, @Session() session:any) {
     const user = await this.usersService.find(body.email);
     if (user) {
       throw new NotFoundException('email in use');
@@ -40,8 +44,8 @@ export class UsersController {
 
     return result;
   }
-@Post('/signin')
-  async signin(@Body() body: CreateUserDto, @Session() session) {
+  @Post('/signin')
+  async signin(@Body() body: CreateUserDto, @Session() session:any) {
     const user = await this.usersService.find(body.email);
 
     if (!user) {

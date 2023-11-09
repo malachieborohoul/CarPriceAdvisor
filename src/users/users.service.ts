@@ -17,14 +17,12 @@ export class UsersService {
       return user;
     }
 
-    async findOne(id:number){
-        const user = await this.repo.findOneBy({id});
-
-        if(!user){
-            throw new NotFoundException("user not found");
+    async findOne(id: number) {
+        if(!id){
+         return null;
         }
-        return user;
-    }
+         return this.repo.findOneBy({id});
+       }
 
     async create(email: string, password: string){
         const user = await this.find(email);
