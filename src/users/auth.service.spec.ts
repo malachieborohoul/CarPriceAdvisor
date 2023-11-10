@@ -10,6 +10,9 @@ it('create an auth service instance', async () => {
   };
 
   const module = Test.createTestingModule({
-    providers:[AuthService]
+    providers:[AuthService,{
+      provide: UsersService,
+      useValue: fakeUsersService
+    }]
   })
 });
