@@ -24,7 +24,11 @@ describe('Auth Service', () => {
     service = module.get(AuthService);
   });
 
-  it('create an auth service instance', () => {
+  it('create an auth service instance', async() => {
     expect(service).toBeDefined();
   });
+
+  it('create a new user with a salted and hashed password', ()=>{
+
+  })
 });
