@@ -3,7 +3,7 @@ import { AuthService } from './auth.service';
 import { UsersService } from './users.service';
 
 describe('Auth Service', () => {
-  let service: UsersService;
+  let service: AuthService;
   beforeEach(async () => {
     const fakeUsersService: Partial<UsersService> = {
       find: () => Promise.resolve([]),
@@ -28,7 +28,14 @@ describe('Auth Service', () => {
     expect(service).toBeDefined();
   });
 
-  it('create a new user with a salted and hashed password', ()=>{
+  it('create a new user with a salted and hashed password', async()=>{
+   const user = await service.signup('bsm@gmail.com', '12345');
 
+   expect(user.password).not.toEqual('12345');
+
+   const [salt, hash]=user.password.split('.');
+
+   expect(salt).toBeDefined();
+   expect(hash).toBeDefined();
   })
 });
