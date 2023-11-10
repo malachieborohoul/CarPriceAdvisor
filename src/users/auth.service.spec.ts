@@ -4,6 +4,6 @@ import { UsersService } from './users.service';
 
 it('create an auth service instance',async ()=>{
   const fakeUsersService ={
-    
+    find: ()=>Promise.resolve([])
   }
 })
