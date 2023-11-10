@@ -4,8 +4,9 @@ import { UsersService } from './users.service';
 
 describe('AuthService', () => {
   let service: AuthService;
+  let fakeUsersService: Partial<UsersService>;
   beforeEach(async () => {
-    const fakeUsersService = {
+     fakeUsersService = {
       find: () => Promise.resolve([]),
       create: (email: string, password: string) =>
         Promise.resolve({ id: 1, email, password }),
@@ -39,7 +40,9 @@ describe('AuthService', () => {
   });
 
   it('throws an error if user signs up with email that is in use',async()=>{
+    fakeUsersService.find=()=> Promise.resolve([{id:1, email: 'bsm', password: '1'}])
 
+    await service.signup('bsm@gmail.com', '12345');
   })
-
+ 
 });
