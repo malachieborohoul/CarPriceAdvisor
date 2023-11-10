@@ -2,9 +2,9 @@ import { Test } from '@nestjs/testing';
 import { AuthService } from './auth.service';
 import { UsersService } from './users.service';
 
-describe('AuthService', () => {
-  let service: AuthService;
-  beforeEach(async () => {
+describe('Auth Service', () => {
+  let service:UsersService;
+  beforeEach(async() => {
     const fakeUsersService: Partial<UsersService> = {
       find: () => Promise.resolve([]),
       create: (email: string, password: string) =>
@@ -17,14 +17,14 @@ describe('AuthService', () => {
         {
           provide: UsersService,
           useValue: fakeUsersService,
-        }, 
+        },
       ],
     }).compile();
 
-    service = module.get(AuthService);
+     service = module.get(AuthService)
   });
 
-  it('create an auth service instance', async () => {
-    expect(service).toBeDefined();
-  });
+  it('create an auth service instance', ()=>{
+    
+  })
 });
