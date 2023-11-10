@@ -1,9 +1,9 @@
 import { Test } from '@nestjs/testing';
 import { AuthService } from './auth.service';
 import { UsersService } from './users.service';
-
-it('create an auth service instance', async () => {
-  const fakeUsersService:Partial<UsersService> = {
+let service: AuthService;
+beforeEach(async () => {
+  const fakeUsersService: Partial<UsersService> = {
     find: () => Promise.resolve([]),
     create: (email: string, password: string) =>
       Promise.resolve({ id: 1, email, password }),
@@ -19,7 +19,9 @@ it('create an auth service instance', async () => {
     ],
   }).compile();
 
-  const service = module.get(AuthService);
+  service = module.get(AuthService);
+});
 
+it('create an auth service instance', async () => {
   expect(service).toBeDefined();
 });
