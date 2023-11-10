@@ -1,7 +1,7 @@
 import { Test } from '@nestjs/testing';
 import { AuthService } from './auth.service';
 import { UsersService } from './users.service';
-
+// Auth service test
 describe('Auth Service', () => {
   let service: AuthService;
   beforeEach(async () => {
@@ -38,5 +38,10 @@ describe('Auth Service', () => {
    expect(salt).toBeDefined();
 
    expect(password).toBeDefined();
+  })
+
+  it('signin a user', async()=>{
+    const user = await service.signin('bsm@gmail.com', '12345');
+    expect(user.password).not.toEqual('123456');
   })
 });
