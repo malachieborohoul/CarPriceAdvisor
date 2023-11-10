@@ -38,5 +38,8 @@ describe('AuthService', () => {
     expect(hash).toBeDefined();
   });
 
-  
+  it('throws an error if user signs up with email that is in use',async()=>{
+
+  })
+
 });
