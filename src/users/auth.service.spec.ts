@@ -29,13 +29,14 @@ describe('Auth Service', () => {
   });
 
   it('create a new user with a salted and hashed password', async()=>{
-   const user = await service.signup('bsm@gmail.com', '12345');
+   const user = await service.signup('bsm@gmail.com', '123456');
 
-   expect(user.password).not.toEqual('12345');
+   expect(user.password).not.toEqual('123456');
 
-   const [salt, hash]=user.password.split('.');
+   const [salt, password]= user.password.split('.');
 
    expect(salt).toBeDefined();
-   expect(hash).toBeDefined(); 
+
+   expect(password).toBeDefined();
   })
 });
