@@ -3,8 +3,8 @@ import { AuthService } from './auth.service';
 import { UsersService } from './users.service';
 
 describe('Auth Service', () => {
-  let service:UsersService;
-  beforeEach(async() => {
+  let service: UsersService;
+  beforeEach(async () => {
     const fakeUsersService: Partial<UsersService> = {
       find: () => Promise.resolve([]),
       create: (email: string, password: string) =>
@@ -21,10 +21,10 @@ describe('Auth Service', () => {
       ],
     }).compile();
 
-     service = module.get(AuthService)
+    service = module.get(AuthService);
   });
 
-  it('create an auth service instance', ()=>{
-    
-  })
+  it('create an auth service instance', () => {
+    expect(service).toBeDefined();
+  });
 });
