@@ -21,11 +21,22 @@ describe('AuthService', () => {
       ],
     }).compile();
 
-     service = module.get(AuthService);
-
+    service = module.get(AuthService);
   });
 
-  it('create an authservice instance', ()=>{
+  it('create an authservice instance', () => {
     expect(service).toBeDefined();
-  })
+  });
+
+  it('create a new user with a salted and hashed password', async () => {
+    const user = await service.signup('bsm@gmail.com', '12345');
+
+    expect(user.password).not.toEqual('12345');
+
+    const [salt, hash] = user.password.split('.');
+    expect(salt).toBeDefined();
+    expect(hash).toBeDefined();
+  });
+
+  
 });
