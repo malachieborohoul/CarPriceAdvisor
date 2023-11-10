@@ -9,10 +9,17 @@ it('create an auth service instance', async () => {
       Promise.resolve({ id: 1, email, password }),
   };
 
-  const module = Test.createTestingModule({
-    providers:[AuthService,{
-      provide: UsersService,
-      useValue: fakeUsersService
-    }]
-  })
+  const module = await Test.createTestingModule({
+    providers: [
+      AuthService,
+      {
+        provide: UsersService,
+        useValue: fakeUsersService,
+      },
+    ],
+  }).compile();
+
+  const service = module.get(AuthService);
+
+  expect(service).toBeDefined();
 });
