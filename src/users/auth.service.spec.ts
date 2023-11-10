@@ -2,7 +2,7 @@ import { Test } from '@nestjs/testing';
 import { AuthService } from './auth.service';
 import { UsersService } from './users.service';
 
-it('can create instance of auth service', async () => {
+it('create an instance for AuthService', async () => {
   const fakeUsersService = {
     find: () => Promise.resolve([]),
     create: (email: string, password: string) =>
@@ -20,6 +20,5 @@ it('can create instance of auth service', async () => {
   }).compile();
 
   const service = module.get(AuthService);
-
   expect(service).toBeDefined();
 });
