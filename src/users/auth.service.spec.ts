@@ -37,5 +37,6 @@ describe('Auth Service', () => {
     const [salt, hash]= user.password.split('.');
 
     expect(salt).toBeDefined();
+    expect(hash).toBeDefined();
   })
 });
