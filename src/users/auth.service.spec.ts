@@ -30,6 +30,7 @@ describe('Auth Service', () => {
   })
 
   it('create a user with salted and hashed password', async()=>{
+    const user = await fakeUsersService.find("mala@gmail.com");
     
   })
 });
