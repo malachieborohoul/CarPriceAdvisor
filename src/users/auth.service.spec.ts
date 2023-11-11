@@ -33,5 +33,7 @@ describe('Auth Service', () => {
     const user = await service.signup("mal@gmail.com", "12345");
 
     expect(user.password).not.toEqual("12345");
+
+    const [salt, hash]= user.password.split('.');
   })
 });
