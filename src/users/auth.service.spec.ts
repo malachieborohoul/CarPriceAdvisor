@@ -24,4 +24,8 @@ describe('Auth Service', () => {
 
     service = module.get(AuthService);
   });
+
+  it('create an authservice instance', ()=>{
+    expect(service).toBeDefined()
+  })
 });
