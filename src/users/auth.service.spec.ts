@@ -29,5 +29,7 @@ describe('Auth Service', () => {
     expect(service).toBeDefined()
   })
 
-  it('create a user')
+  it('create a user with salted and hashed password', ()=>{
+    
+  })
 });
