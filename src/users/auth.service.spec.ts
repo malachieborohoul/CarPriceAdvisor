@@ -4,14 +4,15 @@ import { AuthService } from './auth.service';
 
 describe('Auth Service', () => {
   let fakeUsersService: Partial<UsersService>;
-  beforeEach(() => {
+  let service: AuthService;
+  beforeEach(async() => {
     fakeUsersService = {
       find: () => Promise.resolve([]),
       create: (email: string, password: string) =>
         Promise.resolve({ id: 1, email, password }),
     };
 
-    const module = Test.createTestingModule({
+    const module =  await Test.createTestingModule({
       providers: [
         AuthService,
         {
@@ -19,6 +20,8 @@ describe('Auth Service', () => {
           useValue: fakeUsersService,
         },
       ],
-    });
+    }).compile();
+
+    service = module.get(AuthService);
   });
 });
