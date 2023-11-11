@@ -45,7 +45,7 @@ describe('Auth Service', () => {
       Promise.resolve([{ id: 1, email: 'bsm@gmail.com', password: '12345' }]);
     try {
       await service.signup('bsm@gmail.com', '12345'); 
-    } catch (err) {
+    } catch (error) {
       done()
     } 
   });
