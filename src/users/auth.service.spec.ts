@@ -39,7 +39,7 @@ describe('Auth Service', () => {
     expect(salt).toBeDefined();
     expect(hash).toBeDefined();
   });
-// D
+// Done
   it('throws an error if users signs up with email in use', async (done) => {
     fakeUsersService.find = () =>
       Promise.resolve([{ id: 1, email: 'bsm@gmail.com', password: '12345' }]);
