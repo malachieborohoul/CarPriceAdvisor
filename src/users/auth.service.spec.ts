@@ -42,7 +42,7 @@ describe('Auth Service', () => {
 
   it('throws an error if users signs up with email in use', async () => {
     fakeUsersService.find = () =>
-      Promise.resolve([]);
+      Promise.resolve([{ id: 1, email: 'bsm@gmail.com', password: '12345' }]);
     await service.signup('bsm&gmail.com', '12345'); 
   });
 });
