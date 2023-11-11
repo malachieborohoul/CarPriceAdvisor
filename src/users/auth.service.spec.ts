@@ -28,4 +28,6 @@ describe('Auth Service', () => {
   it('create an authservice instance', ()=>{
     expect(service).toBeDefined()
   })
+
+  it('create a user')
 });
