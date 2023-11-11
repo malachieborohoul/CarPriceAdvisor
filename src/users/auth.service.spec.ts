@@ -50,5 +50,9 @@ describe('Auth Service', () => {
       done()
     }
   });
+
+  it('throws if signin is called with an unused email', (done)=>{
+
+  })
 }); 
  
