@@ -30,7 +30,8 @@ describe('Auth Service', () => {
   })
 
   it('create a user with salted and hashed password', async()=>{
-    const user = await fakeUsersService.find("mala@gmail.com");
-    
+    const user = await service.signup("mal@gmail.com", "12345");
+
+    expect(user.password).not.toEqual("12345");
   })
 });
