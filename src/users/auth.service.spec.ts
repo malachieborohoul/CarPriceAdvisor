@@ -35,5 +35,7 @@ describe('Auth Service', () => {
     expect(user.password).not.toEqual("12345");
 
     const [salt, hash]= user.password.split('.');
+
+    expect(salt).toBeDefined();
   })
 });
