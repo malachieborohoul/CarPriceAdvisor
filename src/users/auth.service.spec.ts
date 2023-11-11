@@ -40,23 +40,25 @@ describe('Auth Service', () => {
     expect(hash).toBeDefined();
   });
 
-  it('throws an error if users signs up with email in use',  async (done) => {
+  it('throws an error if users signs up with email in use', async (done) => {
     fakeUsersService.find = () =>
       Promise.resolve([{ id: 1, email: 'bsm@gmail.com', password: '12345' }]);
     try {
-     const user= await service.signup('bsm@gmail.com', '12345'); 
-     expect(user).toBe({})
+      const user = await service.signup('bsm@gmail.com', '12345');
+      expect(user).toBe({});
     } catch (err) {
-      done()
+      done();
     }
   });
 
-  it('throws if signin is called with an unused email', async(done)=>{
+  it('throws if signin is called with an unused email', async (done) => {
     try {
-      await service.signin('bsl@gmail.com', "12345")
+      await service.signin('bsl@gmail.com', '12345');
     } catch (error) {
-      
+      done();
     }
+  });
+  it('throws if an invalid password is provided', async(done)=>{
+
   })
-}); 
- 
+});
