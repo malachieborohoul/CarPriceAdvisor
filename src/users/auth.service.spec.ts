@@ -47,6 +47,6 @@ describe('Auth Service', () => {
       await service.signup('bsm@gmail.com', '12345'); 
     } catch (err) {
       done()
-    }
+    } 
   });
 });
