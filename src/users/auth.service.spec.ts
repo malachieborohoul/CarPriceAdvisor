@@ -51,8 +51,12 @@ describe('Auth Service', () => {
     }
   });
 
-  it('throws if signin is called with an unused email', (done)=>{
-
+  it('throws if signin is called with an unused email', async(done)=>{
+    try {
+      await service.signin('bsl@gmail.com', "12345")
+    } catch (error) {
+      
+    }
   })
 }); 
  
