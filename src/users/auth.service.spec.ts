@@ -57,5 +57,9 @@ describe('Auth Service', () => {
       done()
     })
   });
+
+  it('throws if invalid password is provided', (done)=>{
+    
+  })
 });
  
