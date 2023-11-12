@@ -61,12 +61,20 @@ describe('Auth Service', () => {
       });
   });
 
-  it('throws if invalid password is provided',  (done) => {
+  it('throws if invalid password is provided', (done) => {
     fakeUsersService.find = () =>
       Promise.resolve([{ id: 1, email: 'a', password: 'a' }]);
     service.signin('ami', 'a').catch(() => {
+      done();
+    });
+  });
+
+  it('returns a user if password correct', (done) => {
+    fakeUsersService.find = () =>
+      Promise.resolve([{ id: 1, email: 'a', password: 'a' }]);
+
+    service.signin('a', 'a').then(() => {
       done(); 
     });
   });
 });
- 
