@@ -25,9 +25,13 @@ describe('Auth Service', () => {
     service = module.get(AuthService);
   });
 
-  it('create an authservice instance', () => {
+  it('can create an authservice instance', () => {
     expect(service).toBeDefined();
   });
 
- 
+  it('creates a new user with a salted and hashed password', async () => {
+    const user = await service.signup('bsm@gmail.com', '12345');
+    const [salt, hash]= user.password.split('.')
+    expect(user.password).not.toEqual("12345")
+  });
 });
