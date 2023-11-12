@@ -70,7 +70,7 @@ describe('Auth Service', () => {
   });
 
   
-// ret
+// re
   it('returns a user if password correct', async () => {
     //   fakeUsersService.find = () =>
     //     Promise.resolve([{ id: 1, email: 'a', password: 'a' }]);
