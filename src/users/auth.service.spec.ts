@@ -61,11 +61,11 @@ describe('Auth Service', () => {
       });
   });
 
-  it('throws if invalid password is provided', async (done) => {
+  it('throws if invalid password is provided',  (done) => {
     fakeUsersService.find = () =>
       Promise.resolve([{ id: 1, email: 'a', password: 'a' }]);
     service.signin('ami', 'a').catch(() => {
-      done();
+      done(); 
     });
   });
 });
