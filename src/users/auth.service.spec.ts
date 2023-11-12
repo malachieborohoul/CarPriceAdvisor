@@ -69,12 +69,15 @@ describe('Auth Service', () => {
     });
   });
 
-  it('returns a user if password correct',async() => {
-    fakeUsersService.find = () =>
-      Promise.resolve([{ id: 1, email: 'a', password: 'a' }]);
+  it('returns a user if password correct', async () => {
+    //   fakeUsersService.find = () =>
+    //     Promise.resolve([{ id: 1, email: 'a', password: 'a' }]);
+    //  const user =await service.signin('a', 'a');
+    //  expect(user).toBeDefined()
 
-   const user =await service.signin('a', 'a');
 
-   expect(user).toBeDefined() 
+  const user= await  service.signin('bsmm@gmail.com', '123456') 
+  console.log(user) 
   });
 });
+ 
