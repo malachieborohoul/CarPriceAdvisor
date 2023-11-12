@@ -51,6 +51,7 @@ describe('Auth Service', () => {
   });
 
   it('throws error if signin is called with an unused email', (done) => {
+    fakeUsersService.find = ()=>Promise.resolve([{id:1, email: "a", password:"a"}])
     service.signin("email","pass").then(()=>{
       done()
     }).catch(()=>{
