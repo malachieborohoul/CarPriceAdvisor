@@ -61,12 +61,12 @@ describe('Auth Service', () => {
       });
   });
 
-  it('throws if invalid password is provided', async () => {
+  it('throws if invalid password is provided', async (done) => {
     fakeUsersService.find = () =>
       Promise.resolve([{ id: 1, email: 'a', password: 'a' }]);
-    const user = await service.signin('ami', 'a');
-    const [salt, hash] = user.password.split('.');
-
-    expect(hash).toEqual('a')
-  }); 
+    service.signin('ami', 'a').catch(() => {
+      done();
+    });
+  });
 });
+ 
