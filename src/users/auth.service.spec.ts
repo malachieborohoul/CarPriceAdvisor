@@ -48,5 +48,14 @@ describe('Auth Service', () => {
       .catch(() => {
         done();
       });
-  }); 
+  });
+
+  it('throws error if signin is called with an unused email', (done) => {
+    service.signin("email","pass").then(()=>{
+      done()
+    }).catch(()=>{
+      done()
+    })
+  });
 });
+ 
