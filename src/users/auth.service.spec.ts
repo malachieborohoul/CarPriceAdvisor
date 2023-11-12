@@ -75,6 +75,6 @@ describe('Auth Service', () => {
 
    const user =await service.signin('a', 'a');
 
-   expect(user).toBeDefined()
+   expect(user).toBeDefined() 
   });
 });
