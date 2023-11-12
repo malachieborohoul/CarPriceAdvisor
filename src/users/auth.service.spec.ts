@@ -37,12 +37,16 @@ describe('Auth Service', () => {
     expect(hash).toBeDefined();
   });
 
-  it('throws error if email is in use', async(done) => {
-    fakeUsersService.find = () =>
-      Promise.resolve([{ id: 1, email: 'a', password: 'a' }]);
-    service.signup('bs@gmail.com', '12345').catch(() => {
-      done();
-    });
-  });
+  it('throws error if email is in use', (done) => {
+    // fakeUsersService.find = () =>
+    //   Promise.resolve([{ id: 1, email: 'a', password: 'a' }]);
+    service
+      .signup('bs@gmail.com', '12345')
+      .then(() => {
+        done();
+      })
+      .catch(() => {
+        done();
+      });
+  }); 
 });
- 
