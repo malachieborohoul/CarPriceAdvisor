@@ -38,6 +38,8 @@ describe('Auth Service', () => {
   });
 
   it('throws error if email is in use', (done) => {
+    fakeUsersService.find = () =>
+      Promise.resolve([{ id: 1, email: 'a', password: 'a' }]);
     service.signup('bs@gmail.com', '12345').catch(() => {
       done();
     });
