@@ -69,12 +69,12 @@ describe('Auth Service', () => {
     });
   });
 
-  it('returns a user if password correct', (done) => {
+  it('returns a user if password correct',async() => {
     fakeUsersService.find = () =>
       Promise.resolve([{ id: 1, email: 'a', password: 'a' }]);
 
-    service.signin('a', 'a').then(() => {
-      done(); 
-    });
+   const user =await service.signin('a', 'a');
+
+   expect(user).toBeDefined()
   });
 });
