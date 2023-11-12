@@ -51,15 +51,22 @@ describe('Auth Service', () => {
   });
 
   it('throws error if signin is called with an unused email', (done) => {
-    service.signin("email","pass").then(()=>{
-      done()
-    }).catch(()=>{
-      done()
-    })
+    service
+      .signin('email', 'pass')
+      .then(() => {
+        done();
+      })
+      .catch(() => {
+        done();
+      });
   });
 
-  it('throws if invalid password is provided', (done)=>{
-    
-  })
+  it('throws if invalid password is provided', async () => {
+    fakeUsersService.find = () =>
+      Promise.resolve([{ id: 1, email: 'a', password: 'a' }]);
+    const user = await service.signin('ami', 'a');
+    const [salt, hash] = user.password.split('.');
+
+    expect(hash).toEqual('a')
+  }); 
 });
- 
