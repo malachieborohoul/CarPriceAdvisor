@@ -39,7 +39,7 @@ describe('Auth Service', () => {
     expect(salt).toBeDefined();
     expect(hash).toBeDefined();
   });
-// Do
+  
   it('throws an error if users signs up with email in use', async (done) => {
     fakeUsersService.find = () =>
       Promise.resolve([{ id: 1, email: 'bsm@gmail.com', password: '12345' }]);
@@ -51,20 +51,16 @@ describe('Auth Service', () => {
     }
   });
 
-  it('throws if signin is called with an unused email', async (done) => {
-    try {
-      await service.signin('bsl@gmail.com', '12345');
-    } catch (error) {
+  it('throws if signin is called with an unused email', (done) => {
+    service.signin('bsl@gmail.com', '12345').catch(() => {
       done();
-    }
+    });
   });
-  it('throws if an invalid password is provided', async(done)=>{
-    fakeUsersService.find=()=>Promise.resolve([{id:1,email: "ddkdk@d.com", password: "djdjd"}]);
-    service.signin('dddjj@ddj.com',  "ZZZZ")
+  it('throws if an invalid password is provided', async (done) => {
+    fakeUsersService.find = () =>
+      Promise.resolve([{ id: 1, email: 'ddkdk@d.com', password: 'djdjd' }]);
+    service.signin('dddjj@ddj.com', 'ZZZZ');
     try {
-      
-    } catch (error) {
-      
-    }
-  })
+    } catch (error) {}
+  });
 });
