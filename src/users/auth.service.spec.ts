@@ -34,5 +34,10 @@ describe('AuthService', () => {
     const user = await service.signup('bsm', '12345');
 
     const [salt, hash]= user.password.split('.');
+
+    expect('12345').not.toEqual(user.password);
+    expect(salt).toBeDefined();
+
+    expect(hash).toBeDefined()
   });
 });
