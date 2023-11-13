@@ -40,6 +40,7 @@ describe('AuthService', () => {
   });
 
   it('throws error if email is in use',()=>{
-    
+    fakeUsersService.find=()=>Promise.resolve([{id:1, email:"a", password:"a"}]);
+    service.signup('b','b')
   })
 });
