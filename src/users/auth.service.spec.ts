@@ -1,2 +1,2 @@
-// AuthS
+// Auth
 describe('AuthService', () => {});
