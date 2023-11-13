@@ -38,4 +38,8 @@ describe('AuthService', () => {
     expect(salt).toBeDefined();
     expect(hash).toBeDefined();
   });
+
+  it('throws error if email is in use',()=>{
+    
+  })
 });
