@@ -39,8 +39,10 @@ describe('AuthService', () => {
     expect(hash).toBeDefined();
   });
 
-  it('throws error if email is in use',()=>{
+  it('throws error if email is in use',(done)=>{
     fakeUsersService.find=()=>Promise.resolve([{id:1, email:"a", password:"a"}]);
-    service.signup('b','b')
+    service.signup('b','b').catch(()=>{
+      done()
+    }) 
   })
 });
