@@ -64,11 +64,11 @@ describe('AuthService', () => {
 
   it('returns a user if password correct', async()=>{
     fakeUsersService.find = () =>
-    Promise.resolve([{ id: 1, email: 'a', password: 'a' }]);
+    Promise.resolve([{ id: 1, email: 'a', password: '4db9fda497015f77.2d475e234d11eb9f6d6b63a768fa0c468a8593803b374e4db6bb66a2abc88c7a' }]);
 
     const user = await service.signin('bsm4@gmail.com','123456'); 
-
-    
+    expect(user).toBeDefined()
+     
     
   })
 });
