@@ -30,7 +30,6 @@ describe('AuthService', () => {
     expect(service).toBeDefined();
   });
   it('creates a new user with a salted and hashed password', async() => {
-    // fakeUsersService.find = ()=>Promise.resolve([{id:1,email:'a', password:'a'}])
     const user = await service.signup('a', 'a') 
  
     const [salt, hash] = user.password.split('.');
@@ -40,4 +39,13 @@ describe('AuthService', () => {
 
     expect('a').not.toEqual(hash)
   });
+
+  it('throws error if email is in use', (done)=>{
+    fakeUsersService.find = ()=>Promise.resolve([{id:1,email:'a', password:'a'}])
+
+    service.signup('a', 'a').catch(()=>{
+      done() 
+    })
+
+  })
 });
