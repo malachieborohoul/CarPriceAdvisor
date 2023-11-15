@@ -8,10 +8,10 @@ describe('AuthService', () => {
   let service: AuthService;
 
   beforeEach(async () => {
-    fakeUsersService: {
-      find: () => Promise.resolve([]);
+    fakeUsersService= {
+      find: () => Promise.resolve([]),
       create: (email: string, password: string) =>
-        Promise.resolve({ id: 1, email, password });
+        Promise.resolve({ id: 1, email, password })
     }
 
     const module = await Test.createTestingModule({
@@ -32,7 +32,7 @@ describe('AuthService', () => {
   it('creates a new user with a salted and hashed password', async() => {
     fakeUsersService.find = ()=>Promise.resolve([{id:1,email:'a', password:'a'}])
     const [user] = await fakeUsersService.find('m')
-
+ 
     const [salt, hash] = user.password.split('.');
 
     expect(salt).toBeDefined();
