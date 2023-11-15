@@ -49,8 +49,20 @@ describe('AuthService', () => {
   });
 
   it('throws error if signin is called with an unused email', (done) => {
+    
     service.signin('a', 'a').catch(()=>{
       done()
     })
   });
+
+  it('throws if invalid password is provided',(done)=>{
+    fakeUsersService.find = () =>
+    Promise.resolve([{ id: 1, email: 'a', password: 'a' }]);
+    service.signin('a', 'a').catch(()=>{
+      done();
+    })
+
+    
+
+  })
 });
