@@ -30,8 +30,8 @@ describe('AuthService', () => {
     expect(service).toBeDefined();
   });
   it('creates a new user with a salted and hashed password', async() => {
-    fakeUsersService.find = ()=>Promise.resolve([{id:1,email:'a', password:'a'}])
-    const [user] = await fakeUsersService.find('m')
+    // fakeUsersService.find = ()=>Promise.resolve([{id:1,email:'a', password:'a'}])
+    const user = await service.signup('a', 'a') 
  
     const [salt, hash] = user.password.split('.');
 
