@@ -12,7 +12,15 @@ describe('AuthService', () => {
         Promise.resolve({ id: 1, email, password });
     }
 
-    const module = Test
+    const module = Test.createTestingModule({
+      providers: [
+        AuthService,
+        {
+          provide: UsersService,
+          useValue: fakeUsersService,
+        },
+      ],
+    });
   });
   it('can create an authservice instance', async () => {});
 });
