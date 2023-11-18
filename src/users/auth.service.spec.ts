@@ -1,7 +1,7 @@
 import { Test } from '@nestjs/testing';
 import { UsersService } from './users.service';
 import { AuthService } from './auth.service';
-// AuthServiceAu
+// AuthServiceA
 describe('AuthService', () => {
   let fakeUsersService: Partial<UsersService>;
   let service: AuthService;
