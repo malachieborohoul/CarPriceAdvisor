@@ -3,6 +3,8 @@ import { AuthService } from './auth.service';
 import { UsersService } from './users.service';
 let fakeUsersService: Partial<UsersService>;
 let service: AuthService;
+
+// AuthServiceAuthServic
 describe('AuthService', () => {
   beforeEach(async () => {
     const module = await Test.createTestingModule({
@@ -35,7 +37,7 @@ describe('AuthService', () => {
     expect(salt).toBeDefined();
     expect(hash).toBeDefined();
   })
-
+// 
   it('throws error if email is in use',()=>{
 
   })
