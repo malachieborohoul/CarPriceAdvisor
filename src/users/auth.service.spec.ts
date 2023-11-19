@@ -30,10 +30,14 @@ describe('AuthService', () => {
   it('creates a new user with a salted and hashed password', async()=>{
     const user = await fakeUsersService.create('a', 'a');
 
-    const [salt, hash]= user.password;
-    expect('a').not.toEqual(user.password)
+    const [salt, hash] = user.password.split('.'); 
+    expect(user.password).not.toEqual('a') 
     expect(salt).toBeDefined();
     expect(hash).toBeDefined();
+  })
+
+  it('throws error if email is in use',()=>{
+
   })
 });
  
