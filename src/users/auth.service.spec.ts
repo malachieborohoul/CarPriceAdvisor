@@ -4,7 +4,7 @@ import { UsersService } from './users.service';
 let fakeUsersService: Partial<UsersService>;
 let service: AuthService;
 
-// AuthServiceAut
+// AuthServiceAu
 describe('AuthService', () => {
   beforeEach(async () => {
     const module = await Test.createTestingModule({
