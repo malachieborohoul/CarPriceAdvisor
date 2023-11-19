@@ -1,14 +1,14 @@
 import { Test } from '@nestjs/testing';
 import { AuthService } from './auth.service';
 import { UsersService } from './users.service';
-
+let fakeUsersService: Partial<UsersService>;
+let service: AuthService;
 describe('AuthService', async() => {
-  const fakeUsersService: Partial<UsersService> = {
+   fakeUsersService = {
     find: () => Promise.resolve([]),
     create: (email: string, password: string) =>
       Promise.resolve({ id: 1, email, password }),
   };
-  service: AuthService;
 
   const module = await Test.createTestingModule({
     providers: [
@@ -18,5 +18,7 @@ describe('AuthService', async() => {
         useValue: fakeUsersService,
       },
     ],
-  });
+  }).compile();
+
+  service = module.get(AuthService);
 });
