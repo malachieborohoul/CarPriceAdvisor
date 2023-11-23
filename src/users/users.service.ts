@@ -26,4 +26,11 @@ export class UsersService {
 
     return user;
   }
+  async update(id:number, attrs: Partial<User>){
+    const user = await this.findOne(id);
+
+    Object.assign(user, attrs)
+
+    return this.userRepository.save(user)
+  }
 }
