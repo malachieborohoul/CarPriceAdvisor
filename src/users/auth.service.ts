@@ -22,8 +22,28 @@ export class AuthService {
 
     const salt = randomBytes(24).toString();
 
-    const hash = await scrypt(salt, password, 32);
+    const hash = (await scrypt(salt, password, 32)) as Buffer;
 
-    return this.usersService.create(email, password);
+    const result = salt + '.' + hash.toString();
+
+    return this.usersService.create(email, result);
+  }
+
+  async signin(email: string, password: string) {
+    const [user] = await this.usersService.find(email);
+
+    if (!user) {
+      throw new NotFoundException('user not found');
+    }
+
+    const [salt, hash] = user.password.split('.');
+
+    const hashedPassword = (await scrypt(salt, password, 32)) as Buffer;
+
+    if (hashedPassword.toString() !== hash) {
+      throw new BadRequestException('bad password');
+    }
+
+    return user;
   }
 }
