@@ -5,7 +5,7 @@ import { promisify } from 'util';
 
 const scrypt = promisify(_scrypt)
 
-// Ijectab
+// Ijecta
 @Injectable()
 export class AuthService {
     constructor(private usersService: UsersService){}
