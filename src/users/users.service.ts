@@ -40,7 +40,5 @@ export class UsersService {
     return this.userRepository.remove(user);
   }
 
-  async create(email:string, password:string){
-    const user= await this.find(email)
-  }
+  
 }
