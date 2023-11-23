@@ -10,7 +10,7 @@ import { User } from './users/users.entity';
   providers: [AppService],
   imports: [UsersModule,
     TypeOrmModule.forRoot({
-      type:"mysql",
+      type:"sqlite",
       database: "db",
       entities:[User]
     })
