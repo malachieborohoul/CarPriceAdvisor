@@ -12,19 +12,19 @@ import { UsersService } from './users.service';
 import { CreateUserDto } from './dtos/create-user.dto';
 import { AuthService } from './auth.service';
 
-@Controller('users')
+@Controller('auth')
 export class UsersController {
   constructor(
     private usersService: UsersService,
     private authService: AuthService,
   ) {}
 
-  @Post()
+  @Post('/signup')
   signup(@Body() body: CreateUserDto) {
     return this.authService.signup(body.email, body.password);
   }
 
-  @Post()
+  @Post('/signin')
   signin(@Body() body: CreateUserDto){
     return this.authService.signin(body.email, body.password);
   }
