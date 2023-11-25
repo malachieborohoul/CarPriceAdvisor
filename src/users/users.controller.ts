@@ -25,7 +25,9 @@ export class UsersController {
     private authService: AuthService,
   ) {}
 
-  whoami(@Session() session:any) {}
+  whoami(@Session() session:any) {
+    
+  }
 
   @Post('/signout')
   signout(@Session() session: any) {
