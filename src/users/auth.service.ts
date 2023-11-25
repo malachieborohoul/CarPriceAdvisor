@@ -22,9 +22,9 @@ export class AuthService {
 
     const salt = randomBytes(8).toString('hex');
 
-    const hash = (await scrypt(salt, password, 32)) as Buffer;
+    const hash = (await scrypt(password, salt, 32)) as Buffer;
 
-    const result = salt + '.' + hash.toString();
+    const result = salt + '.' + hash.toString('hex');
 
     return this.usersService.create(email, result);
   }
@@ -38,7 +38,7 @@ export class AuthService {
 
     const [salt, hash] = user.password.split('.');
 
-    const hashedPassword = (await scrypt(salt, password, 32)) as Buffer;
+    const hashedPassword = (await scrypt(password, salt, 32)) as Buffer;
 
     if (hash !== hashedPassword.toString('hex')) {
       throw new BadRequestException('bad password');
