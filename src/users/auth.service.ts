@@ -20,7 +20,7 @@ export class AuthService {
       throw new BadRequestException('email in use');
     }
 
-    const salt = randomBytes(24).toString();
+    const salt = randomBytes(8).toString('hex');
 
     const hash = (await scrypt(salt, password, 32)) as Buffer;
 
