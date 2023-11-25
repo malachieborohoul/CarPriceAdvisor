@@ -16,6 +16,7 @@ import { CreateUserDto } from './dtos/create-user.dto';
 import { AuthService } from './auth.service';
 import { Serialize } from 'src/interceptors/serialize.interceptor';
 import { UserDto } from './dtos/user.dto';
+import { CurrentUser } from './decorators/current-user.decorator';
 
 @Serialize(UserDto)
 @Controller('auth')
@@ -25,7 +26,7 @@ export class UsersController {
     private authService: AuthService,
   ) {}
 
-  whoami(@Session() session:any) {
+  whoami(@CurrentUser() user) {
     
   }
 
