@@ -1,5 +1,5 @@
 import {
-    BadRequestException,
+  BadRequestException,
   Body,
   Controller,
   Delete,
@@ -25,13 +25,18 @@ export class UsersController {
     private authService: AuthService,
   ) {}
 
-  signout(@Session() session:any) {}
+  whoami(@Session() session:any) {}
+
+  @Post('/signout')
+  signout(@Session() session: any) {
+    session.userId = null;
+  }
 
   @Post('/signup')
   async signup(@Body() body: CreateUserDto, @Session() session: any) {
     const user = await this.authService.signup(body.email, body.password);
-    if(user){
-        throw new BadRequestException('email in use')
+    if (user) {
+      throw new BadRequestException('email in use');
     }
 
     session.userId = user.id;
