@@ -3,10 +3,12 @@ import {
   Controller,
   Delete,
   Get,
+  NotFoundException,
   Param,
   Patch,
   Post,
   Query,
+  Session,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dtos/create-user.dto';
@@ -22,14 +24,22 @@ export class UsersController {
     private authService: AuthService,
   ) {}
 
+  signout(){
+
+  }
+
   @Post('/signup')
   signup(@Body() body: CreateUserDto) {
     return this.authService.signup(body.email, body.password);
   }
 
   @Post('/signin')
-  signin(@Body() body: CreateUserDto){
-    return this.authService.signin(body.email, body.password);
+  async signin(@Body() body: CreateUserDto, @Session() session:any){
+    const user = await this.authService.signin(body.email, body.password);
+
+    if(!user){
+        throw new NotFoundException("email not found")
+    }
   }
   @Get('/id')
   findUser(@Param('id') id: string) {

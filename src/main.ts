@@ -11,13 +11,17 @@ async function bootstrap() {
   //     whitelist: true,
   //   }),
   // );
-  // app.useGlobalPipes(new ValidationPipe());
+  app.useGlobalPipes(
+    new ValidationPipe({
+      whitelist: true,
+    }),
+  );
 
-  // app.use(
-  //   cookieSession({
-  //     keys: ['bsm'],
-  //   }),
-  // );
+  app.use(
+    cookieSession({
+      keys: ['bsm'],
+    }),
+  );
 
   //  app.use(cookieSession({
   // keys:['dkkdkddk']
