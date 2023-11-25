@@ -17,6 +17,7 @@ import { AuthService } from './auth.service';
 import { Serialize } from 'src/interceptors/serialize.interceptor';
 import { UserDto } from './dtos/user.dto';
 import { CurrentUser } from './decorators/current-user.decorator';
+import { User } from './users.entity';
 
 @Serialize(UserDto)
 @Controller('auth')
@@ -26,15 +27,16 @@ export class UsersController {
     private authService: AuthService,
   ) {}
 
-  whoami(@CurrentUser() user) {
-    
+  @Get('/whoami')
+  whoami(@CurrentUser() user:User) {
+    return user;
   }
 
   @Post('/signout')
   signout(@Session() session: any) {
     session.userId = null;
   }
-
+ 
   @Post('/signup')
   async signup(@Body() body: CreateUserDto, @Session() session: any) {
     const user = await this.usersService.find(body.email)
