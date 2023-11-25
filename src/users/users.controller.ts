@@ -37,14 +37,17 @@ export class UsersController {
 
   @Post('/signup')
   async signup(@Body() body: CreateUserDto, @Session() session: any) {
-    const user = await this.authService.signup(body.email, body.password);
+    const user = await this.usersService.find(body.email)
+
     if (user) {
       throw new BadRequestException('email in use');
     }
+    const result = await this.authService.signup(body.email, body.password);
 
-    session.userId = user.id;
 
-    return user;
+    session.userId = result.id;
+
+    return result;
   }
 
   @Post('/signin')
@@ -59,7 +62,7 @@ export class UsersController {
 
     return user;
   }
-  @Get('/id')
+  @Get('/:id')
   findUser(@Param('id') id: string) {
     return this.usersService.findOne(parseInt(id));
   }
@@ -68,12 +71,12 @@ export class UsersController {
     return this.usersService.find(email);
   }
 
-  @Patch('/id')
+  @Patch('/:id')
   update(@Param('id') id: string, @Body() body: CreateUserDto) {
     return this.usersService.update(parseInt(id), body);
   }
 
-  @Delete('/id')
+  @Delete('/:id')
   remove(@Param('id') id: string) {
     return this.usersService.remove(parseInt(id));
   }
