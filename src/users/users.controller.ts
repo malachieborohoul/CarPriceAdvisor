@@ -1,4 +1,5 @@
 import {
+    BadRequestException,
   Body,
   Controller,
   Delete,
@@ -24,22 +25,31 @@ export class UsersController {
     private authService: AuthService,
   ) {}
 
-  signout(){
-
-  }
+  signout(@Session() session:any) {}
 
   @Post('/signup')
-  signup(@Body() body: CreateUserDto) {
-    return this.authService.signup(body.email, body.password);
+  async signup(@Body() body: CreateUserDto, @Session() session: any) {
+    const user = await this.authService.signup(body.email, body.password);
+    if(user){
+        throw new BadRequestException('email in use')
+    }
+
+    session.userId = user.id;
+
+    return user;
   }
 
   @Post('/signin')
-  async signin(@Body() body: CreateUserDto, @Session() session:any){
+  async signin(@Body() body: CreateUserDto, @Session() session: any) {
     const user = await this.authService.signin(body.email, body.password);
 
-    if(!user){
-        throw new NotFoundException("email not found")
+    if (!user) {
+      throw new NotFoundException('user not found');
     }
+
+    session.userId = user.id;
+
+    return user;
   }
   @Get('/id')
   findUser(@Param('id') id: string) {
