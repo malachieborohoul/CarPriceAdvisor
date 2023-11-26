@@ -9,7 +9,7 @@ import { promisify } from 'util';
 
 const scrypt = promisify(_scrypt);
 
-//InjectableIn
+//InjectableI
 @Injectable()
 export class AuthService {
   constructor(private usersService: UsersService) {}
