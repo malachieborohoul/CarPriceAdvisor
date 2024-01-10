@@ -11,7 +11,7 @@ async function bootstrap() {
   //     whitelist: true,
   //   }),
   // );
-//:^^ghhhgcgfghhhgcgfghh
+//:^^ghhhgcgfghhhgcgfgh
 
 
   app.useGlobalPipes(
