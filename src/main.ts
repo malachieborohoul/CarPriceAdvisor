@@ -12,7 +12,7 @@ async function bootstrap() {
   //   }),
   // );
 //:^^ghh
-//ghhghhhgcgghhghhhgcgghh
+//ghhghhhgcgghhghhhgcggh
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true,
