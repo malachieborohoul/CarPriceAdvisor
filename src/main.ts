@@ -11,7 +11,7 @@ async function bootstrap() {
   //     whitelist: true,
   //   }),
   // );
-//:^^ghhghhhg
+//:^^ghhghhh
 
   app.useGlobalPipes(
     new ValidationPipe({
